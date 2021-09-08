@@ -56,9 +56,10 @@
       "value": "Asia/Kolkata",
       "required": false
     },
-    "ALIVE_PIC": {
-      "description": "Set your alive pic",
-      "value": "https://telegra.ph/file/703a9fbef7ae4336463bb.jpg",
+    "WHOM YOU LOVE?": {
+      "description": "💫Himi🥰 Love me so much😍 Choose- himi/patlu",
+      "value": "himi
+",
       "required": false
     }
   },
