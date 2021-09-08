@@ -1,13 +1,13 @@
 {
-  "name": "Catuserbot",
-  "description": "A simple Telegram userbot based on Telethon . Maintained by Jisan ",
-  "logo": "https://telegra.ph/file/3d60313110c58684b31ea.jpg",
+  "name": "💫HimiBot",
+  "description": "A faster and op UserBot😁🔥 made with love❣and support of you all guys🥰🧡🤍💚",
+  "logo": "https://telegra.ph/file/01b1e4f3804a0946aa0b4.jpg",
   "keywords": [
     "plugin",
     "modular",
     "productivity"
   ],
-  "repository": "https://github.com/Jisan09/catuserbot/",
+  "repository": "https://github.com/utsavthelegend/himibot/",
   "website": "#TODO",
   "success_url": "#TODO",
   "env": {
@@ -56,9 +56,9 @@
       "value": "Asia/Kolkata",
       "required": false
     },
-    "UPSTREAM_REPO": {
-      "description": "Use either goodcat or badcat .if you need custom deploy then type your git repo link",
-      "value": "badcat",
+    "ALIVE_PIC": {
+      "description": "Set your alive pic",
+      "value": "https://telegra.ph/file/703a9fbef7ae4336463bb.jpg",
       "required": false
     }
   },
