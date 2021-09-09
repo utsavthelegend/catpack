@@ -3,19 +3,19 @@
 _get_ziplink () {
     local regex
     regex='(https?)://github.com/.+/.+'
-    if [[ $WHOM YOU LOVE? == "patlu" ]]
+    if [[ $WHO_IS_OP == "patlu" ]]
     then
         echo "aHR0cHM6Ly9naXRodWIuY29tL3NhbmR5MTcwOS9jYXR1c2VyYm90L2FyY2hpdmUvbWFzdGVyLnppcA==" | base64 -d
-    elif [[ $WHOM YOU LOVE? == "himi" ]]
+    elif [[ $WHO_IS_OP == "himi" ]]
     then
         echo "aHR0cHM6Ly9naXRodWIuY29tL2ppc2FuMDkvY2F0dXNlcmJvdC9hcmNoaXZlL21hc3Rlci56aXA=" | base64 -d
-    elif [[ $WHOM YOU LOVE? =~ $regex ]]
+    elif [[ $WHO_IS_OP =~ $regex ]]
     then
-        if [[ WHOM YOU LOVE?_BRANCH ]]
+        if [[ WHO_IS_OP_BRANCH ]]
         then
-            echo "${WHOM YOU LOVE?}/archive/${WHOM YOU LOVE?_BRANCH}.zip"
+            echo "${WHO_IS_OP}/archive/${WHO_IS_OP_BRANCH}.zip"
         else
-            echo "${WHOM YOU LOVE?_REPO}/archive/master.zip"
+            echo "${WHO_IS_OP_REPO}/archive/master.zip"
         fi
     else
         echo "aHR0cHM6Ly9naXRodWIuY29tL3NhbmR5MTcwOS9jYXR1c2VyYm90L2FyY2hpdmUvbWFzdGVyLnppcA==" | base64 -d
@@ -26,15 +26,15 @@ _get_repolink () {
     local regex
     local rlink
     regex='(https?)://github.com/.+/.+'
-    if [[ $WHOM YOU LOVE? == "patlu" ]]
+    if [[ $WHO_IS_OP == "patlu" ]]
     then
         rlink=`echo "aHR0cHM6Ly9naXRodWIuY29tL3NhbmR5MTcwOS9jYXR1c2VyYm90" | base64 -d`
-    elif [[ $WHOM YOU LOVE? == "himi" ]]
+    elif [[ $WHO_IS_OP == "himi" ]]
     then
         rlink=`echo "aHR0cHM6Ly9naXRodWIuY29tL0ppc2FuMDkvY2F0dXNlcmJvdA==" | base64 -d`
-    elif [[ $WHOM YOU LOVE? =~ $regex ]]
+    elif [[ $WHO_IS_OP =~ $regex ]]
     then
-        rlink=`echo "${WHOM YOU LOVE?}"`
+        rlink=`echo "${WHO_IS_OP}"`
     else
         rlink=`echo "aHR0cHM6Ly9naXRodWIuY29tL3NhbmR5MTcwOS9jYXR1c2VyYm90" | base64 -d`
     fi
@@ -49,10 +49,10 @@ _run_python_code() {
 _run_himipack_git() {
     $(_run_python_code 'from git import Repo
 import sys
-OFFICIAL_WHOM YOU LOVE? = "https://github.com/utsavthelegend/himibot"
+OFFICIAL_WHO_IS_OP = "https://github.com/utsavthelegend/himibot"
 ACTIVE_BRANCH_NAME = "master"
 repo = Repo.init()
-origin = repo.create_remote("temponame", OFFICIAL_WHOM YOU LOVE?)
+origin = repo.create_remote("temponame", OFFICIAL_WHO_IS_OP)
 origin.fetch()
 repo.create_head(ACTIVE_BRANCH_NAME, origin.refs[ACTIVE_BRANCH_NAME])
 repo.heads[ACTIVE_BRANCH_NAME].checkout(True) ')
@@ -62,10 +62,10 @@ _run_himi_git() {
     local repolink=$(_get_repolink)
     $(_run_python_code 'from git import Repo
 import sys
-WHOM YOU LOVE?_REPO="'$repolink'"
-ACTIVE_BRANCH_NAME = "'WHOM YOU LOVE?_BRANCH'" or "master"
+WHO_IS_OP_REPO="'$repolink'"
+ACTIVE_BRANCH_NAME = "'WHO_IS_OP_BRANCH'" or "master"
 repo = Repo.init()
-origin = repo.create_remote("temponame", OFFICIAL_WHOM YOU LOVE?)
+origin = repo.create_remote("temponame", OFFICIAL_WHO_IS_OP)
 origin.fetch()
 repo.create_head(ACTIVE_BRANCH_NAME, origin.refs[ACTIVE_BRANCH_NAME])
 repo.heads[ACTIVE_BRANCH_NAME].checkout(True) ')
