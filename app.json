@@ -56,7 +56,7 @@
       "value": "Asia/Kolkata",
       "required": false
     },
-    "WHO_IS_OP": {
+    "UPSTREAM_REPO": {
       "description": "💫Himi🥰 Love me so much😍 Choose- himi/patlu",
       "value": "himi
 ",
