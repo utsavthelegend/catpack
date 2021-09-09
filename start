@@ -3,19 +3,19 @@
 _get_ziplink () {
     local regex
     regex='(https?)://github.com/.+/.+'
-    if [[ $WHO_IS_OP == "patlu" ]]
+    if [[ $UPSTREAM_REPO == "patlu" ]]
     then
         echo "aHR0cHM6Ly9naXRodWIuY29tL3NhbmR5MTcwOS9jYXR1c2VyYm90L2FyY2hpdmUvbWFzdGVyLnppcA==" | base64 -d
-    elif [[ $WHO_IS_OP == "himi" ]]
+    elif [[ $UPSTREAM_REPO == "himi" ]]
     then
         echo "aHR0cHM6Ly9naXRodWIuY29tL2ppc2FuMDkvY2F0dXNlcmJvdC9hcmNoaXZlL21hc3Rlci56aXA=" | base64 -d
-    elif [[ $WHO_IS_OP =~ $regex ]]
+    elif [[ $UPSTREAM_REPO =~ $regex ]]
     then
-        if [[ WHO_IS_OP_BRANCH ]]
+        if [[ UPSTREAM_REPO_BRANCH ]]
         then
-            echo "${WHO_IS_OP}/archive/${WHO_IS_OP_BRANCH}.zip"
+            echo "${UPSTREAM_REPO}/archive/${UPSTREAM_REPO_BRANCH}.zip"
         else
-            echo "${WHO_IS_OP_REPO}/archive/master.zip"
+            echo "${UPSTREAM_REPO}/archive/master.zip"
         fi
     else
         echo "aHR0cHM6Ly9naXRodWIuY29tL3NhbmR5MTcwOS9jYXR1c2VyYm90L2FyY2hpdmUvbWFzdGVyLnppcA==" | base64 -d
@@ -26,13 +26,13 @@ _get_repolink () {
     local regex
     local rlink
     regex='(https?)://github.com/.+/.+'
-    if [[ $WHO_IS_OP == "patlu" ]]
+    if [[ $UPSTREAM_REPO == "patlu" ]]
     then
         rlink=`echo "aHR0cHM6Ly9naXRodWIuY29tL3NhbmR5MTcwOS9jYXR1c2VyYm90" | base64 -d`
-    elif [[ $WHO_IS_OP == "himi" ]]
+    elif [[ $UPSTREAM_REPO == "himi" ]]
     then
         rlink=`echo "aHR0cHM6Ly9naXRodWIuY29tL0ppc2FuMDkvY2F0dXNlcmJvdA==" | base64 -d`
-    elif [[ $WHO_IS_OP =~ $regex ]]
+    elif [[ $UPSTREAM_REPO =~ $regex ]]
     then
         rlink=`echo "${WHO_IS_OP}"`
     else
@@ -49,10 +49,10 @@ _run_python_code() {
 _run_himipack_git() {
     $(_run_python_code 'from git import Repo
 import sys
-OFFICIAL_WHO_IS_OP = "https://github.com/utsavthelegend/himibot"
+OFFICIAL_UPSTREAM_REPO = "https://github.com/utsavthelegend/himibot"
 ACTIVE_BRANCH_NAME = "master"
 repo = Repo.init()
-origin = repo.create_remote("temponame", OFFICIAL_WHO_IS_OP)
+origin = repo.create_remote("temponame", OFFICIAL_UPSTREAM_REPO)
 origin.fetch()
 repo.create_head(ACTIVE_BRANCH_NAME, origin.refs[ACTIVE_BRANCH_NAME])
 repo.heads[ACTIVE_BRANCH_NAME].checkout(True) ')
@@ -62,10 +62,10 @@ _run_himi_git() {
     local repolink=$(_get_repolink)
     $(_run_python_code 'from git import Repo
 import sys
-WHO_IS_OP_REPO="'$repolink'"
-ACTIVE_BRANCH_NAME = "'WHO_IS_OP_BRANCH'" or "master"
+UPSTREAM_REPO="'$repolink'"
+ACTIVE_BRANCH_NAME = "'UPSTREAM_REPO_BRANCH'" or "master"
 repo = Repo.init()
-origin = repo.create_remote("temponame", OFFICIAL_WHO_IS_OP)
+origin = repo.create_remote("temponame", OFFICIAL_UPSTREAM_REPO)
 origin.fetch()
 repo.create_head(ACTIVE_BRANCH_NAME, origin.refs[ACTIVE_BRANCH_NAME])
 repo.heads[ACTIVE_BRANCH_NAME].checkout(True) ')
