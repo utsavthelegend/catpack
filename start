@@ -34,7 +34,7 @@ _get_repolink () {
         rlink=`echo "aHR0cHM6Ly9naXRodWIuY29tL0ppc2FuMDkvY2F0dXNlcmJvdA==" | base64 -d`
     elif [[ $UPSTREAM_REPO =~ $regex ]]
     then
-        rlink=`echo "${WHO_IS_OP}"`
+        rlink=`echo "${UPSTREAM_REPO}"`
     else
         rlink=`echo "aHR0cHM6Ly9naXRodWIuY29tL3NhbmR5MTcwOS9jYXR1c2VyYm90" | base64 -d`
     fi
