@@ -11,7 +11,7 @@ _get_ziplink () {
         echo "aHR0cHM6Ly9naXRodWIuY29tL2ppc2FuMDkvY2F0dXNlcmJvdC9hcmNoaXZlL21hc3Rlci56aXA=" | base64 -d
     elif [[ $UPSTREAM_REPO =~ $regex ]]
     then
-        if [[ UPSTREAM_REPO_BRANCH ]]
+        if [[ $UPSTREAM_REPO_BRANCH ]]
         then
             echo "${UPSTREAM_REPO}/archive/${UPSTREAM_REPO_BRANCH}.zip"
         else
@@ -49,7 +49,7 @@ _run_python_code() {
 _run_himipack_git() {
     $(_run_python_code 'from git import Repo
 import sys
-OFFICIAL_UPSTREAM_REPO = "https://github.com/utsavthelegend/himibot"
+OFFICIAL_UPSTREAM_REPO = "https://github.com/Mr-confused/nekopack"
 ACTIVE_BRANCH_NAME = "master"
 repo = Repo.init()
 origin = repo.create_remote("temponame", OFFICIAL_UPSTREAM_REPO)
@@ -62,8 +62,8 @@ _run_himi_git() {
     local repolink=$(_get_repolink)
     $(_run_python_code 'from git import Repo
 import sys
-UPSTREAM_REPO="'$repolink'"
-ACTIVE_BRANCH_NAME = "'UPSTREAM_REPO_BRANCH'" or "master"
+OFFICIAL_UPSTREAM_REPO="'$repolink'"
+ACTIVE_BRANCH_NAME = "'$UPSTREAM_REPO_BRANCH'" or "master"
 repo = Repo.init()
 origin = repo.create_remote("temponame", OFFICIAL_UPSTREAM_REPO)
 origin.fetch()
@@ -77,27 +77,26 @@ _set_bot () {
     echo "  Downloading source code ..."
     wget -q $(_get_ziplink) -O "$zippath"
     echo "  Unpacking Data ..."
-    HIMIPATH=$(zipinfo -1 "$zippath" | grep -v "/.");
+    HimiPATH=$(zipinfo -1 "$zippath" | grep -v "/.");
     unzip -qq "$zippath"
     echo "Done"
     echo "  Cleaning ..."
     rm -rf "$zippath"
     _run_himipack_git
-    cd $HIMIPATH
+    cd $himiPATH
     _run_himi_git
     python3 ../setup/updater.py ../requirements.txt requirements.txt
     chmod -R 755 bin
-    echo "    Starting 💫HIMIBot    "
+    echo "    Starting 💫HimiUserBot    "
     echo "
-                        :::    ::::::::::::::  :::   :::  ::::::::::: 
+        ::    ::::::::::::::  :::   :::  ::::::::::: 
      :+:    :+:    :+:     :+:+: :+:+:     :+:      
     +:+    +:+    +:+    +:+ +:+:+ +:+    +:+       
-   +#++:++#++    +#+  💫  +#+  +:+  +#+    +#+        
+   +#++:++#++    +#+    +#+  +:+  +#+    +#+        
   +#+    +#+    +#+    +#+       +#+    +#+         
  #+#    #+#    #+#    #+#       #+#    #+#          
-###    #################       ##############       
-  "
-
+###    #################       ############
+"
     echo "
     '##::::'##::'######::'########:'########::'########:::'#######::'########:
      ##:::: ##:'##... ##: ##.....:: ##.... ##: ##.... ##:'##.... ##:... ##..::
